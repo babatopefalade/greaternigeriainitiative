@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greater Nigeria Initiative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0F1E35;
+    --navy-mid: #1B2F4E;
+    --navy-light: #243D61;
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-pale: #F5EDD6;
+    --cream: #FAF7F2;
+    --white: #FFFFFF;
+    --text: #1A1A1A;
+    --muted: #6B7A8D;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 4rem;
+    height: 72px;
+    background: rgba(15,30,53,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800; font-size: 1.1rem;
+    letter-spacing: 0.12em; color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 500; font-size: 0.85rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 70% 50%, rgba(201,168,76,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,168,76,0.05) 0%, transparent 60%);
+  }
+  .hero-geo {
+    position: absolute; top: 0; right: 0; bottom: 0; width: 50%;
+    overflow: hidden; opacity: 0.06;
+  }
+  .hero-geo svg { width: 100%; height: 100%; }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 4rem 6rem 6rem;
+    position: relative; z-index: 2;
+  }
+  .hero-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-label::before {
+    content: ''; display: block;
+    width: 32px; height: 1px; background: var(--gold);
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 5vw, 5.5rem);
+    font-weight: 700; line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+  .hero-title em { color: var(--gold); font-style: normal; }
+  .hero-subtitle {
+    font-size: 1.05rem; font-weight: 300; line-height: 1.7;
+    color: rgba(255,255,255,0.65);
+    max-width: 480px; margin-bottom: 3rem;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: var(--gold); color: var(--navy);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 0.85rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 1rem 2rem; text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .hero-cta:hover { background: var(--gold-light); transform: translateX(4px); }
+  .hero-cta::after { content: '→'; }
+
+  .hero-right {
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 2;
+    padding: 6rem 4rem;
+  }
+  .hero-statement {
+    border-left: 3px solid var(--gold);
+    padding: 2.5rem 3rem;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero-statement p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; line-height: 1.65;
+    color: rgba(255,255,255,0.88);
+    font-style: italic; font-weight: 400;
+  }
+  .hero-statement cite {
+    display: block; margin-top: 1.5rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); font-style: normal;
+  }
+
+  /* ── SECTION COMMON ── */
+  section { position: relative; }
+  .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 4rem; }
+  .section-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-tag::before {
+    content: ''; width: 24px; height: 1px; background: var(--gold);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+    font-weight: 700; line-height: 1.15;
+    color: var(--navy); margin-bottom: 1.5rem;
+  }
+  .section-title.light { color: var(--white); }
+
+  /* ── VISION / MISSION ── */
+  .vm-section {
+    background: var(--white);
+    padding: 8rem 0;
+  }
+  .vm-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; border: 1px solid #E5E0D8;
+    margin-top: 4rem;
+  }
+  .vm-card {
+    padding: 3.5rem;
+  }
+  .vm-card:first-child {
+    border-right: 1px solid #E5E0D8;
+    background: var(--navy);
+  }
+  .vm-card:last-child { background: var(--gold-pale); }
+  .vm-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem; font-weight: 700; line-height: 1;
+    color: rgba(201,168,76,0.25); margin-bottom: 1rem;
+  }
+  .vm-card:last-child .vm-number { color: rgba(15,30,53,0.15); }
+  .vm-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .vm-card:last-child .vm-label { color: var(--navy-mid); }
+  .vm-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; line-height: 1.65; font-weight: 400;
+    color: rgba(255,255,255,0.9);
+    font-style: italic;
+  }
+  .vm-card:last-child .vm-text { color: var(--navy); }
+
+  /* ── THEORY OF CHANGE ── */
+  .toc-section {
+    background: var(--cream); padding: 8rem 0;
+  }
+  .toc-grid {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 2px; margin-top: 4rem;
+    background: #D5CFC5;
+  }
+  .toc-card {
+    background: var(--white);
+    padding: 3rem 2.5rem;
+    position: relative;
+    transition: transform 0.3s;
+  }
+  .toc-card:hover { transform: translateY(-6px); z-index: 2; box-shadow: 0 24px 60px rgba(15,30,53,0.12); }
+  .toc-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 4rem; font-weight: 800;
+    color: var(--gold-pale); line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .toc-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--navy); margin-bottom: 1rem;
+  }
+  .toc-body {
+    font-size: 0.92rem; line-height: 1.7; color: #555;
+  }
+  .toc-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px; background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .toc-card:hover::after { transform: scaleX(1); }
+
+  /* ── PILLARS ── */
+  .pillars-section {
+    background: var(--navy); padding: 8rem 0;
+    position: relative; overflow: hidden;
+  }
+  .pillars-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201,168,76,0.06), transparent);
+  }
+  .pillars-grid {
+    display: grid; grid-template-columns: repeat(2,1fr);
+    gap: 1px; margin-top: 4rem;
+    background: rgba(201,168,76,0.15);
+    position: relative; z-index: 2;
+  }
+  .pillar-card {
+    background: var(--navy-mid);
+    padding: 3.5rem;
+    display: flex; flex-direction: column;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .pillar-card:hover { background: var(--navy-light); }
+  .pillar-icon {
+    font-size: 2.2rem; margin-bottom: 1.5rem;
+    display: block;
+  }
+  .pillar-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.3rem; font-weight: 800;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .pillar-desc {
+    font-size: 0.92rem; line-height: 1.75;
+    color: rgba(255,255,255,0.65);
+    flex: 1;
+  }
+  .pillar-divider {
+    width: 32px; height: 2px; background: var(--gold);
+    margin-bottom: 1rem; margin-top: auto;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .pillar-card:hover .pillar-divider { opacity: 1; }
+
+  /* ── DIME NOTE ── */
+  .dime-banner {
+    background: var(--gold);
+    padding: 2rem 4rem;
+    position: relative; z-index: 2;
+  }
+  .dime-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; gap: 3rem;
+  }
+  .dime-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--navy); white-space: nowrap;
+  }
+  .dime-text {
+    font-size: 0.9rem; color: var(--navy);
+    line-height: 1.6;
+  }
+  .dime-pills { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .dime-pill {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    background: var(--navy); color: var(--gold);
+    white-space: nowrap;
+  }
+
+  /* ── PRINCIPLES ── */
+  .principles-section {
+    background: var(--white); padding: 8rem 0;
+  }
+  .principles-list { margin-top: 4rem; }
+  .principle-row {
+    display: grid; grid-template-columns: 280px 1fr;
+    gap: 0;
+    border-bottom: 1px solid #E5E0D8;
+    padding: 2.5rem 0;
+    transition: background 0.2s;
+  }
+  .principle-row:first-child { border-top: 1px solid #E5E0D8; }
+  .principle-row:hover { background: var(--cream); margin: 0 -2rem; padding: 2.5rem 2rem; }
+  .principle-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--navy); padding-right: 2rem;
+    display: flex; align-items: flex-start; gap: 0.75rem;
+  }
+  .principle-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; color: var(--gold); font-weight: 600;
+    flex-shrink: 0;
+  }
+  .principle-body {
+    font-size: 0.93rem; line-height: 1.75; color: #555;
+  }
+
+  /* ── COMMITTEES ── */
+  .committees-section {
+    background: var(--cream); padding: 8rem 0;
+  }
+  .committees-grid {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 1.5rem; margin-top: 4rem;
+  }
+  .committee-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-top: 3px solid transparent;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .committee-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 16px 48px rgba(15,30,53,0.08);
+  }
+  .committee-card:nth-child(5) { grid-column: span 1; }
+  .committee-card:nth-child(4),
+  .committee-card:nth-child(5) {
+    /* centre the last two */
+  }
+  .c-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .c-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.05rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--navy); margin-bottom: 1rem; line-height: 1.3;
+  }
+  .c-mandate {
+    font-size: 0.88rem; line-height: 1.7; color: #666;
+  }
+
+  /* ── OUTPUTS ── */
+  .outputs-section {
+    background: var(--navy); padding: 8rem 0;
+    position: relative; overflow: hidden;
+  }
+  .outputs-grid {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 1px; margin-top: 4rem;
+    background: rgba(255,255,255,0.08);
+  }
+  .output-card {
+    background: var(--navy);
+    padding: 3rem 2.5rem;
+    transition: background 0.3s;
+  }
+  .output-card:hover { background: var(--navy-mid); }
+  .output-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 700; color: rgba(201,168,76,0.2);
+    line-height: 1; margin-bottom: 1rem;
+  }
+  .output-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--gold); margin-bottom: 0.75rem;
+  }
+  .output-desc {
+    font-size: 0.88rem; line-height: 1.7; color: rgba(255,255,255,0.55);
+  }
+
+  /* ── CLOSING ── */
+  .closing-section {
+    background: var(--cream); padding: 8rem 0;
+  }
+  .closing-inner {
+    max-width: 800px; margin: 0 auto;
+    text-align: center;
+  }
+  .closing-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 600; line-height: 1.55;
+    color: var(--navy); font-style: italic;
+    position: relative; padding: 0 2rem;
+  }
+  .closing-quote::before,
+  .closing-quote::after {
+    font-size: 6rem; line-height: 0;
+    position: absolute; color: var(--gold); opacity: 0.3;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .closing-quote::before { content: '\201C'; top: 0.5rem; left: -0.5rem; }
+  .closing-quote::after { content: '\201D'; bottom: -1rem; right: -0.5rem; }
+  .closing-sub {
+    margin-top: 2.5rem;
+    font-size: 0.95rem; color: #666; line-height: 1.7;
+  }
+  .closing-line {
+    width: 64px; height: 2px;
+    background: var(--gold);
+    margin: 2.5rem auto;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    padding: 3rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(201,168,76,0.2);
+  }
+  .footer-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800; font-size: 1rem;
+    letter-spacing: 0.12em; color: var(--white);
+  }
+  .footer-logo span { color: var(--gold); }
+  .footer-meta {
+    font-size: 0.78rem; color: rgba(255,255,255,0.4);
+    text-align: right; line-height: 1.6;
+  }
+  .footer-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.8;
+  }
+
+  /* ── ANIMATIONS ── */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 7rem 2rem 3rem; }
+    .hero-right { padding: 2rem; display: none; }
+    .section-inner { padding: 0 2rem; }
+    .vm-grid, .pillars-grid, .toc-grid { grid-template-columns: 1fr; }
+    .committees-grid { grid-template-columns: 1fr; }
+    .outputs-grid { grid-template-columns: 1fr 1fr; }
+    .principle-row { grid-template-columns: 1fr; gap: 0.75rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .footer-meta { text-align: center; }
+    .dime-inner { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">GN<span>I</span></a>
+  <ul class="nav-links">
+    <li><a href="#vision">Vision</a></li>
+    <li><a href="#pillars">Pillars</a></li>
+    <li><a href="#principles">Principles</a></li>
+    <li><a href="#committees">Committees</a></li>
+    <li><a href="#outputs">Outputs</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-geo">
+    <svg viewBox="0 0 600 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="300" cy="400" r="350" stroke="white" stroke-width="1"/>
+      <circle cx="300" cy="400" r="250" stroke="white" stroke-width="0.5"/>
+      <circle cx="300" cy="400" r="150" stroke="white" stroke-width="0.5"/>
+      <line x1="0" y1="400" x2="600" y2="400" stroke="white" stroke-width="0.5"/>
+      <line x1="300" y1="0" x2="300" y2="800" stroke="white" stroke-width="0.5"/>
+      <line x1="0" y1="0" x2="600" y2="800" stroke="white" stroke-width="0.3"/>
+      <line x1="600" y1="0" x2="0" y2="800" stroke="white" stroke-width="0.3"/>
+      <polygon points="300,50 550,200 550,600 300,750 50,600 50,200" stroke="white" stroke-width="0.5" fill="none"/>
+    </svg>
+  </div>
+  <div class="hero-left">
+    <div class="hero-label">Civic Policy Institution</div>
+    <h1 class="hero-title">
+      Greater<br><em>Nigeria</em><br>Initiative
+    </h1>
+    <p class="hero-subtitle">A civic policy institution for Nigeria's strategic renewal — rigorous in analysis, frank in prescription, committed to the long horizon.</p>
+    <a href="#vision" class="hero-cta">Explore the Charter</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-statement">
+      <p>Nigeria does not lack resources, people, or potential. It lacks the sustained intellectual and institutional architecture to convert these assets into strategic outcomes.</p>
+      <cite>— GNI Founding Statement</cite>
+    </div>
+  </div>
+</section>
+
+<!-- VISION / MISSION -->
+<section class="vm-section" id="vision">
+  <div class="section-inner">
+    <div class="section-tag">Foundation</div>
+    <h2 class="section-title">Vision & Mission</h2>
+  </div>
+  <div class="section-inner">
+    <div class="vm-grid reveal">
+      <div class="vm-card">
+        <div class="vm-number">I</div>
+        <div class="vm-label">Vision</div>
+        <p class="vm-text">A Nigeria that translates its endowments — human and natural resources — into durable power: industrially productive, technologically sovereign, militarily credible, and diplomatically consequential.</p>
+      </div>
+      <div class="vm-card">
+        <div class="vm-number">II</div>
+        <div class="vm-label">Mission</div>
+        <p class="vm-text">To develop, advance, and advocate for evidence-based policy frameworks across economic industrialisation, indigenous innovation, national security, and geopolitical strategy — rebuilding Nigeria's state capacity for sustained regional and global leadership.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THEORY OF CHANGE -->
+<section class="toc-section">
+  <div class="section-inner">
+    <div class="section-tag">Theory of Change</div>
+    <h2 class="section-title">How Change Happens</h2>
+    <div class="toc-grid reveal">
+      <div class="toc-card">
+        <div class="toc-num">01</div>
+        <div class="toc-title">Ideas Shape Policy Environments</div>
+        <p class="toc-body">Sustained, high-quality policy intellectual output — when strategically placed — shifts the Overton window and reframes what is considered politically feasible.</p>
+      </div>
+      <div class="toc-card">
+        <div class="toc-num">02</div>
+        <div class="toc-title">Networks Amplify Influence</div>
+        <p class="toc-body">A credible coalition of reform-oriented technocrats, academics, civil society actors, and diaspora leaders can create durable pressure for structural change even within resistant political systems.</p>
+      </div>
+      <div class="toc-card">
+        <div class="toc-num">03</div>
+        <div class="toc-title">Accountability Requires Data</div>
+        <p class="toc-body">Rigorous measurement of state performance — fiscal health, security outcomes, institutional quality — is a precondition for meaningful accountability and reform momentum.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars-section" id="pillars">
+  <div class="section-inner">
+    <div class="section-tag" style="color:var(--gold)">Strategic Architecture</div>
+    <h2 class="section-title light">The Four Strategic Pillars</h2>
+    <p style="color:rgba(255,255,255,0.6);max-width:600px;line-height:1.7;margin-top:0.5rem;font-size:0.95rem;">GNI's analytical and advocacy work is organised around four pillars constituting an integrated architecture of national power — analysed through the DIME framework.</p>
+  </div>
+  <div class="section-inner" style="margin-top:3rem;">
+    <div class="pillars-grid reveal">
+      <div class="pillar-card">
+        <span class="pillar-icon">⚙️</span>
+        <div class="pillar-name">Industrialisation</div>
+        <p class="pillar-desc">Building Nigeria's productive base through manufacturing depth, value chain integration, and import substitution — converting raw resource endowment into durable economic power.</p>
+        <div class="pillar-divider"></div>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-icon">💡</span>
+        <div class="pillar-name">Innovation</div>
+        <p class="pillar-desc">Cultivating indigenous technological capability, digital infrastructure, and knowledge economy institutions that reduce external dependency and generate sovereign intellectual capital.</p>
+        <div class="pillar-divider"></div>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-icon">🛡️</span>
+        <div class="pillar-name">Military Might</div>
+        <p class="pillar-desc">Professionalising the armed forces, addressing civil-military relations deficits, and developing credible deterrence capacity commensurate with Nigeria's regional leadership ambitions.</p>
+        <div class="pillar-divider"></div>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-icon">🌍</span>
+        <div class="pillar-name">Geopolitical Leverage</div>
+        <p class="pillar-desc">Deploying Nigeria's demographic weight, cultural influence, and institutional presence to lead in African diplomacy, shape multilateral agendas, and secure strategic interests abroad.</p>
+        <div class="pillar-divider"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIME BANNER -->
+<div class="dime-banner">
+  <div class="dime-inner">
+    <div class="dime-label">Analytical Framework</div>
+    <div class="dime-pills">
+      <span class="dime-pill">D — Diplomatic</span>
+      <span class="dime-pill">I — Informational</span>
+      <span class="dime-pill">M — Military</span>
+      <span class="dime-pill">E — Economic</span>
+    </div>
+    <p class="dime-text" style="flex:1;">All four pillars are analysed through the DIME framework, diagnosing gaps between Nigeria's capacity and ambition as a continental power.</p>
+  </div>
+</div>
+
+<!-- PRINCIPLES -->
+<section class="principles-section" id="principles">
+  <div class="section-inner">
+    <div class="section-tag">Guiding Principles</div>
+    <h2 class="section-title">How We Work</h2>
+    <div class="principles-list reveal">
+      <div class="principle-row">
+        <div class="principle-name"><span class="principle-num">01</span>Evidence Before Advocacy</div>
+        <p class="principle-body">GNI's policy positions will be grounded in empirical analysis, not ideological preference. Prescriptions must be traceable to evidence, and GNI will publicly acknowledge complexity and uncertainty where they exist.</p>
+      </div>
+      <div class="principle-row">
+        <div class="principle-name"><span class="principle-num">02</span>Long-Termism</div>
+        <p class="principle-body">Nigeria's structural challenges are generational. GNI resists the short-termism of electoral cycles and transactional politics, anchoring its work to 10–25 year strategic horizons.</p>
+      </div>
+      <div class="principle-row">
+        <div class="principle-name"><span class="principle-num">03</span>Institutional Independence</div>
+        <p class="principle-body">GNI does not align with political parties or factional interests. Its credibility depends on independence, and it will defend that independence against co-optation — including from state actors and commercial sponsors.</p>
+      </div>
+      <div class="principle-row">
+        <div class="principle-name"><span class="principle-num">04</span>Constructive Patriotism</div>
+        <p class="principle-body">GNI is critical without being cynical. It holds the Nigerian state to account not from a posture of despair, but from a conviction that transformation is achievable and from a commitment to building the intellectual infrastructure that makes it possible.</p>
+      </div>
+      <div class="principle-row">
+        <div class="principle-name"><span class="principle-num">05</span>Pan-African Solidarity</div>
+        <p class="principle-body">Nigeria's renewal is not an end in itself. GNI situates Nigerian strategy within a broader African development agenda, recognising that a stronger Nigeria is a precondition for a stronger continent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMITTEES -->
+<section class="committees-section" id="committees">
+  <div class="section-inner">
+    <div class="section-tag">Governance</div>
+    <h2 class="section-title">Specialist Committees</h2>
+    <p style="color:#666;max-width:580px;line-height:1.7;margin-top:0.5rem;font-size:0.95rem;">Five thematic committees drive GNI's substantive work, each co-chaired by a practitioner and an academic to ensure analytical rigour and policy-relevant framing.</p>
+    <div class="committees-grid reveal">
+      <div class="committee-card">
+        <div class="c-tag">Committee I</div>
+        <div class="c-name">Economic & Industrial Policy Committee</div>
+        <p class="c-mandate">Oversees the industrialisation and innovation pillars; develops policy positions on manufacturing, trade, technology, and fiscal architecture.</p>
+      </div>
+      <div class="committee-card">
+        <div class="c-tag">Committee II</div>
+        <div class="c-name">Security & Defence Advisory Committee</div>
+        <p class="c-mandate">Drives the military might pillar; analyses civil-military relations, defence procurement, and internal security challenges.</p>
+      </div>
+      <div class="committee-card">
+        <div class="c-tag">Committee III</div>
+        <div class="c-name">Foreign Policy & Geostrategy Committee</div>
+        <p class="c-mandate">Leads the geopolitical leverage pillar; engages multilateral forums, shapes Nigeria's African diplomacy agenda, and advises on strategic partnerships.</p>
+      </div>
+      <div class="committee-card">
+        <div class="c-tag">Committee IV</div>
+        <div class="c-name">Institutional Governance & Reform Committee</div>
+        <p class="c-mandate">Addresses constitutional architecture, electoral integrity, federalism, and the structural conditions for effective statecraft.</p>
+      </div>
+      <div class="committee-card">
+        <div class="c-tag">Committee V</div>
+        <div class="c-name">Research, Intelligence & Publications Committee</div>
+        <p class="c-mandate">Coordinates GNI's knowledge output — policy briefs, working papers, data products, and public engagement — ensuring coherence across the Initiative's strategic agenda.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTPUTS -->
+<section class="outputs-section" id="outputs">
+  <div class="section-inner">
+    <div class="section-tag" style="color:var(--gold)">Publications & Products</div>
+    <h2 class="section-title light">Key Outputs</h2>
+    <div class="outputs-grid reveal">
+      <div class="output-card">
+        <div class="output-num">01</div>
+        <div class="output-title">GNI Policy Briefs</div>
+        <p class="output-desc">Short-form, practitioner-oriented analysis on discrete policy questions across the four strategic pillars.</p>
+      </div>
+      <div class="output-card">
+        <div class="output-num">02</div>
+        <div class="output-title">GNI Working Papers</div>
+        <p class="output-desc">Peer-reviewed, long-form research intended for academic and high-level policy audiences.</p>
+      </div>
+      <div class="output-card">
+        <div class="output-num">03</div>
+        <div class="output-title">Nigeria Strategic Review</div>
+        <p class="output-desc">An annual assessment of Nigeria's performance across the DIME dimensions, benchmarked against peer countries and prior years.</p>
+      </div>
+      <div class="output-card">
+        <div class="output-num">04</div>
+        <div class="output-title">Greater Nigeria Dialogues</div>
+        <p class="output-desc">High-level roundtables convening technocrats, scholars, and civil society leaders around GNI's strategic agenda.</p>
+      </div>
+      <div class="output-card">
+        <div class="output-num">05</div>
+        <div class="output-title">Public Commentary</div>
+        <p class="output-desc">Op-eds, policy responses, and media engagement designed to shift mainstream discourse on Nigeria's strategic options.</p>
+      </div>
+      <div class="output-card" style="background:var(--navy-mid);border:1px solid rgba(201,168,76,0.2);">
+        <div class="output-num" style="color:rgba(201,168,76,0.5)">✦</div>
+        <div class="output-title">GNI Data Products</div>
+        <p class="output-desc">Proprietary analytical tools including the Nigeria State Fiscal Health Scorer and the Nigeria Political Risk Quarterly — built to inform evidence-based governance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing-section">
+  <div class="section-inner">
+    <div class="closing-inner">
+      <div class="section-tag" style="justify-content:center;">Founding Statement</div>
+      <blockquote class="closing-quote reveal">
+        Nigeria does not lack resources, people, or potential. It lacks the sustained intellectual and institutional architecture to convert these assets into strategic outcomes. The Greater Nigeria Initiative is founded to begin building that architecture — brick by brick, brief by brief, generation by generation.
+      </blockquote>
+      <div class="closing-line"></div>
+      <p class="closing-sub">We do not promise quick victories. We offer rigorous analysis, frank counsel, and a long-term commitment to the Nigeria that should be.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">GREATER NIGERIA <span>INITIATIVE</span></div>
+    <div class="footer-sub" style="margin-top:0.5rem;">Est. 2024 · Nigeria</div>
+  </div>
+  <div class="footer-meta">
+    Civic Policy · Strategic Analysis · National Renewal<br>
+    Nigeria · West Africa
+  </div>
+</footer>
+
+<script>
+  // Intersection Observer for reveal animations
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  reveals.forEach(el => obs.observe(el));
+
+  // Smooth active nav
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--gold)' : '';
+    });
+  });
+</script>
+</body>
+</html>
